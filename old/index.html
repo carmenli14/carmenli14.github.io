@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript"
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+//
+$('a.poplight[href^=#]').click(function() {
+var popID = $(this).attr('rel'); //Get Popup Name
+var popURL = $(this).attr('href'); //Get Popup href to define size
+var query= popURL.split('?');
+var dim= query[1].split('&');
+var popWidth = dim[0].split('=')[1]; //Gets the first query string value
+$('#' + popID).fadeIn().css({ 'width': Number( popWidth ) }).prepend('<a href="#" class="close"></a>');
+var popMargTop = ($('#' + popID).height() + 80) / 2;
+var popMargLeft = ($('#' + popID).width() + 80) / 2;
+//Apply Margin to Popup
+$('#' + popID).css({
+'margin-top' : -popMargTop,
+'margin-left' : -popMargLeft
+});
+$('body').append('<div id="fade"></div>');
+$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'})
+return false;
+});
+$('a.close, #fade').live('click', function() {
+$('#fade , .popup_block').fadeOut(function() {
+$('#fade, a.close').remove(); //fade them both out
+});
+return false;
+});
+});
+</script>
+
+
+  <style>
+
+  @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+  body {
+    margin: 100px 0px 0px 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size:10px;
+    letter-spacing: 0.5px;
+  }
+
+  .top, .right, .bottom, .left{
+    position:fixed;
+    background:#fcebd5;
+    z-index:999;
+  }
+
+  .top, .bottom{
+    width:100%;
+    left:0;
+    height: 25px;
+  }
+
+  .right, .left{
+    height:100%;
+    top:0;
+    width: 23px;
+  }
+
+  .top{top:0}
+  .bottom{bottom:0}
+  .left{left:0}
+  .right{right:0}
+
+  .topnav {
+    overflow: hidden;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:6;
+    padding:30px 0 0 0;
+    line-height:160%;
+    text-align:center;
+    background-color: #fcebd5;
+    border-bottom:0px solid #ffa179;
+  }
+
+  .topnav a {
+    display:inline-block;
+    padding-bottom:30px;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-decoration:none;
+    font-style:normal;
+    position:relative;
+    margin:0 14px;
+  }
+
+  .topnav a:hover {
+    border-bottom:1px solid ##ffa179;
+    color: #ffa179;
+  }
+
+  .active {
+    background-color: #eee6ff;
+    color: white;
+  }
+
+  .topnav .icon {
+    display: none;
+  }
+
+
+  #header {
+      z-index:4;
+      height:auto;
+      top:150px;
+      padding:10px;
+      left:50%;
+      margin-left:-180px;
+      width:340px;
+      position:absolute;}
+
+  #description {
+      text-align:left;
+      color: black ;
+      position:relative;
+      z-index:5;
+      width:250px;
+      display:block;
+      padding:5px;
+      margin-left:80px;}
+
+  #description a{
+      z-index:5;
+      position:relative;
+      text-decoration:none;
+      color:#000;
+      border-bottom:1px solid rgba(0,0,0,0);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;}
+
+  #description a:hover{
+      color:#ffa179 ;
+      border-bottom:1px solid #ffa179 ;
+      text-decoration:none;}
+
+  #icon {
+      position:absolute;
+      padding-left:5px;
+      top:50%;
+      margin-top:-25px;
+      width:50px;}
+
+  #icon img {
+      max-width:50px;
+      border-radius:100%;
+      border:{text:icon border width}px solid {color:icon border};
+    }
+
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+  /*POPUP*/
+.popup_block{
+display:none;
+background:#fff; /*change the color of your background*/
+padding:15px;
+border:2px solid #fcebd5; /*change the color of your border*/
+float:center;
+position:fixed;
+top:50%;left:52%;
+z-index: 99999;
+}
+
+#fade {
+display:none;
+position:fixed;
+left:0px;
+top:0px;
+width:100%;
+height:100%;
+z-index:9999;
+background:white; /* change the color of the background below the box */
+opacity:.70; /* change the opacity */
+}
+
+*html #fade {position: absolute;}
+*html .popup_block {position: absolute;}
+/*POPUP*/
+
+  </style>
+  </head>
+  <body>
+
+  <div class="topnav" id="myTopnav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="resume.html">Resume</a>
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+  <div id="header">
+  <div id="icon"><img style="vertical-align:middle;" src="flowercat.png"/></div>
+
+      <div id="description">Hello, my name is Carmen!! Welcome to my website, enjoy! :-)
+</div>
+
+  </div>
+
+  <script>
+  function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+          x.className += " responsive";
+      } else {
+          x.className = "topnav";
+      }
+  }
+  </script>
+
+  <img src='transparent.png' width=400px style='position:fixed;top:80px;right:0px;z-index:999'/>
+
+  <img src='https://78.media.tumblr.com/4a29908af17637ac08534062862bdbb0/tumblr_ojo1lu6cE11w31pibo1_540.gif' width=300px style='position:fixed;bottom:20px;left:0px;z-index:999'/>
+
+  </body>
+
+  <div id="box1" class="popup_block">
+
+    <h2>About Me:</h2>
+    <p><b>Name:</b> Carmen Li </p>
+    <p><b>Age:</b> 17 </p>
+    <p><b>Location:</b> San Francisco, CA </p>
+    <p><b>Education:</b> Lowell High School </p>
+    <br>
+
+    <h2>A few of my favorite things..</h2>
+    <p><b>Shows:</b> Brooklyn Nine-Nine, The Good Place, New Girl, AOS, TW, TVD,
+    Big Bang Theory, The 100, Reign, Jane The Virgin</p>
+    <p><b>Movies:</b> All the MCU films, Love Rosie, Stuck In Love, Set It Up,
+    Kingsman, Wonder Woman, Me Before You, Jumanji, Fantastic Beasts, Edge of 17</p>
+    <p><b>Books:</b> To All The Boys I've Loved Before series, Red Queen series,
+    Looking for Alaska </p>
+
+</div></div></div></div></div></div></div></div></div></div></div>
+
+
+<div id="box2" class="popup_block">
+
+  <h2>Contact Me:</h2>
+  <p><b>Instagram: </b>@jkcarmenn </p>
+  <p><b>Facebook: </b>Carmen Li </p>
+  <p><b>Gmail: </b>itscarmenn14@gmail.com </p>
+
+</div></div></div></div></div></div></div></div></div></div></div>
+
+
+<div id="box3" class="popup_block">
+
+  <h2>Resume:</h2>
+  <p>
+  <a href="resume.pdf" target="_blank">Click here</a>
+  </p>
+
+</div></div></div></div></div></div></div></div></div></div></div>
+
+  </html>
