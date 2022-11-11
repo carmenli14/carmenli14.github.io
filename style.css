@@ -8,14 +8,14 @@
     --main: #fff;
     --bg-color: rgb(249, 249, 249);
     --proj-color: rgb(248, 248, 248);
-    --hover: #e2b8b8;
-    --accent: #f6e2e2;
+    --hover: rgb(156, 174, 205);
+    --accent: rgb(156, 174, 205);
     --text: #1f1f1f;
     --text2: rgba(0,0,0,.8);
     --text3: rgb(150, 150, 150);
     --text4: rgba(0,0,0,.3);
     --bg1: rgb(255, 255, 255);
-    --bg2: rgb(249, 242, 242);
+    --bg2: rgb(230, 237, 245);
     --bg-gradient: linear-gradient(60deg, rgba(241,212,232,0.5) 0%, rgba(143,155,207,0.5) 90%);
 }
 
